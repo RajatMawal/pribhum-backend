@@ -19,11 +19,11 @@ import otpRouter from "./Routes/otpRoute.js";
   app.use(express.urlencoded({ extended: true}));
 
   const FRONTEND_URL = process.env.NODE_ENV === "production"
-  ? "https://your-frontend.vercel.app"  // <-- Replace with your deployed frontend URL
+  ? "https://pribhum-frontend.vercel.app/"
   : "http://localhost:5173";
 
 const BACKEND_URL = process.env.NODE_ENV === "production"
-  ? "https://your-backend.vercel.app"  // <-- Replace with your deployed backend URL
+  ? "https://pribhum-frontend.vercel.app/"
   : "http://localhost:9000";
 
   app.use(cors({
