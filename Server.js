@@ -18,8 +18,16 @@ import otpRouter from "./Routes/otpRoute.js";
   app.use(express.json());
   app.use(express.urlencoded({ extended: true}));
 
+  const FRONTEND_URL = process.env.NODE_ENV === "production"
+  ? "https://your-frontend.vercel.app"  // <-- Replace with your deployed frontend URL
+  : "http://localhost:5173";
+
+const BACKEND_URL = process.env.NODE_ENV === "production"
+  ? "https://your-backend.vercel.app"  // <-- Replace with your deployed backend URL
+  : "http://localhost:9000";
+
   app.use(cors({
-      origin: "http://localhost:5173", 
+      origin: FRONTEND_URL, 
       credentials: true,             
       methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"], 
       allowedHeaders: ["Content-Type", "Authorization"]
@@ -44,7 +52,7 @@ import otpRouter from "./Routes/otpRoute.js";
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:8000/auth/google/callback",
+        callbackURL: `${BACKEND_URL}/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -75,11 +83,11 @@ import otpRouter from "./Routes/otpRoute.js";
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      failureRedirect: "http://localhost:5173/login",
+      failureRedirect: `${FRONTEND_URL}/login`,
     }),
     googleAuth,
     (req, res) => {
-      res.redirect("http://localhost:5173");
+      res.redirect(`${FRONTEND_URL}`);
     }
   );
 
