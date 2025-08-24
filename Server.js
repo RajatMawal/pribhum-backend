@@ -23,9 +23,13 @@
   : "http://localhost:5173";
 
 
-const BACKEND_URL = process.env.NODE_ENV === "production"
-  ? "https://pribhum-backend.vercel.app"
-  : `http://localhost:${port}`;
+// const BACKEND_URL = process.env.NODE_ENV === "production"
+//   ? "https://pribhum-backend.vercel.app"
+//   : `http://localhost:${port}`;
+
+  const BACKEND_URL = "https://pribhum-backend.vercel.app"
+  
+
 
   app.use(cors({
       origin: FRONTEND_URL, 
@@ -42,7 +46,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production", 
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     },
   })
