@@ -43,7 +43,6 @@ const BACKEND_URL = process.env.NODE_ENV === "production"
     })
   );
 
-  // google loogin config
   app.use(passport.initialize());
   app.use(passport.session());
 
