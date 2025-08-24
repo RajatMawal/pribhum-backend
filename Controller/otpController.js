@@ -1,8 +1,8 @@
-import Otp from "../Model/otp.js";
+import Otp from "../Model/Otp.js";
 import  jwt  from "jsonwebtoken";
 import "dotenv/config.js";
 import User from "../Model/User.js";
-import { sendEmail, verifyEmailOtp } from "./sendMail.js";
+import { verifyEmailOtp } from "./sendMail.js";
 
 export const sendOtp = async (req, res, next) => {
   try {

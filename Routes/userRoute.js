@@ -1,6 +1,6 @@
 import express from "express"
 import { deleteUser, findAllUser, forgotPassword, getAccess, getUser, login, logoutUser, otpVerify, register, updatePassword, updateRole} from "../Controller/userController.js"
-import { auth, otpAuth } from "../Middleware/auth.js"
+import { auth} from "../Middleware/auth.js"
 
 
 const user = express.Router()

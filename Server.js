@@ -10,7 +10,7 @@
   import user from "./Routes/userRoute.js";
   import { errorhandler } from "./Middleware/errorHandler.js";
   import propertyRoute from "./Routes/propertyRoute.js";
-import otpRouter from "./Routes/otpRoute.js";
+  import otpRouter from "./Routes/otpRoute.js";
 
   const app = express();
 
@@ -95,6 +95,9 @@ const BACKEND_URL = process.env.NODE_ENV === "production"
 
 
 
+  app.get("/",(req,res)=>{
+    res.send("helllo world")
+  })
 
   app.use("/api/user",user);
   app.use("/api/property",propertyRoute);
@@ -103,7 +106,7 @@ const BACKEND_URL = process.env.NODE_ENV === "production"
 
   connectDB();
 
-  // app.listen(port, () => {
-  //   console.log(`http://localhost:${port}`);
-  // });
-export default app;
+  app.listen(port, () => {
+    console.log(`http://localhost:${port}`);
+  });
+// export default app;
