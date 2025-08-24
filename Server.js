@@ -36,13 +36,18 @@ const BACKEND_URL = process.env.NODE_ENV === "production"
 
   app.use(cookieParser())
 
-  app.use(
-    session({
-      secret: "secret",
-      resave: false,
-      saveUninitialized: true,
-    })
-  );
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    },
+  })
+);
+
 
   app.use(passport.initialize());
   app.use(passport.session());
