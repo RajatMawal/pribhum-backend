@@ -23,11 +23,10 @@
   : "http://localhost:5173";
 
 
-// const BACKEND_URL = process.env.NODE_ENV === "production"
-//   ? "https://pribhum-backend.vercel.app"
-//   : `http://localhost:${port}`;
+const BACKEND_URL = process.env.NODE_ENV === "production"
+  ? "https://pribhum-backend.vercel.app"
+  : `http://localhost:${port}`;
 
-  const BACKEND_URL = "https://pribhum-backend.vercel.app"
   
 
 
@@ -82,7 +81,7 @@ app.use(
   });
 
   app.get(
-    `${BACKEND_URL}/auth/google`,
+  "/auth/google",
     passport.authenticate("google", {
       scope: ["email", "profile"],
       prompt: "select_account",
@@ -103,10 +102,17 @@ app.use(
   app.use('/uploads', express.static('uploads'));
 
 
+    app.use((err, req, res, next) => {
+  console.error("Server error:", err);
+  res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
+});
 
   app.get("/",(req,res)=>{
     res.send("helllo world")
   })
+
+
+
 
   app.use("/api/user",user);
   app.use("/api/property",propertyRoute);
