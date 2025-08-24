@@ -9,6 +9,10 @@ export const addProperty = async (req, res, next) => {
     const pgId = `PG${Math.floor(Math.random() * 1000000)}`;
     const userId = req._id
 
+    console.log("req._id:", req._id);
+console.log("req.files:", req.files);
+console.log("req.body:", req.body);
+
     const createdBy = await User.findById(userId)
 
 
