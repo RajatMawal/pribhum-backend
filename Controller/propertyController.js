@@ -95,6 +95,13 @@ export const bookingForm = async (req, res, next) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    if(!fullName || !contact || !days)
+    {
+      const error = new Error("All Fields are required")
+      error.status = 400
+      throw (error)
+    }
+
     const userEmail = user.email;
 
   

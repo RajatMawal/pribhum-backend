@@ -22,9 +22,10 @@
   ? "https://pribhum-frontend.vercel.app"
   : "http://localhost:5173";
 
+
 const BACKEND_URL = process.env.NODE_ENV === "production"
   ? "https://pribhum-backend.vercel.app"
-  : "http://localhost:9000";
+  : `http://localhost:${port}`;
 
   app.use(cors({
       origin: FRONTEND_URL, 
