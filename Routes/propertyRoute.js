@@ -1,6 +1,6 @@
 import express from "express"
 import { upload } from "../Middleware/Multer.js"
-import { addProperty, allProperty, bookingForm, deleteProperty,propertyFind} from "../Controlles.js/propertyController.js"
+import { addProperty, allProperty, bookingForm, deleteProperty,propertyFind} from "../Controller/propertyController.js"
 import { auth } from "../Middleware/auth.js"
 
 const propertyRoute = express.Router()

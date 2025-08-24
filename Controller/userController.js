@@ -2,7 +2,6 @@ import generateToken from "../Middleware/generateToken.js";
 import User from "../Model/User.js";
 import bcrypt from "bcrypt";
 import { sendEmail } from "./sendMail.js";
-import otp from "../Model/otp.js";
 
 
 export const register = async (req, res, next) => {
