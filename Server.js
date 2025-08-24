@@ -102,6 +102,8 @@ const BACKEND_URL = process.env.NODE_ENV === "production"
   app.use(errorhandler);
 
   connectDB();
-  app.listen(port, () => {
-    console.log(`http://localhost:${port}`);
-  });
+
+  // app.listen(port, () => {
+  //   console.log(`http://localhost:${port}`);
+  // });
+export default app;
