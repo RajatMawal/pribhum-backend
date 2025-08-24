@@ -82,7 +82,7 @@ app.use(
   });
 
   app.get(
-    "/auth/google",
+    `${BACKEND_URL}/auth/google`,
     passport.authenticate("google", {
       scope: ["email", "profile"],
       prompt: "select_account",
