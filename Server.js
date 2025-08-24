@@ -23,7 +23,7 @@ import otpRouter from "./Routes/otpRoute.js";
   : "http://localhost:5173";
 
 const BACKEND_URL = process.env.NODE_ENV === "production"
-  ? "https://pribhum-frontend.vercel.app"
+  ? "https://pribhum-backend.vercel.app"
   : "http://localhost:9000";
 
   app.use(cors({
