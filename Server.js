@@ -19,19 +19,23 @@
   app.use(express.urlencoded({ extended: true}));
 
   const FRONTEND_URL = process.env.NODE_ENV === "production"
-  ? "https://pribhum-frontend.vercel.app"
+  ? process.env.DOMAIN
   : "http://localhost:5173";
 
 
-const BACKEND_URL = process.env.NODE_ENV === "production"
-  ? "https://pribhum-backend.vercel.app"
-  : `http://localhost:${port}`;
+ const BACKEND_URL =
+  process.env.NODE_ENV === "production"
+    ? `${process.env.DOMAIN}/api`
+    : `http://localhost:${port}/api`;
 
-  
+ const GOOGLE_CALLBACK_URL =
+  process.env.NODE_ENV === "production"
+    ? `${process.env.DOMAIN}/auth/google/callback`
+    : `http://localhost:${port}/auth/google/callback`;
 
 
   app.use(cors({
-      origin: FRONTEND_URL, 
+      origin: [FRONTEND_URL, "http://localhost:5173"], 
       credentials: true,             
       methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"], 
       allowedHeaders: ["Content-Type", "Authorization"]
@@ -60,7 +64,7 @@ app.use(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: `${BACKEND_URL}/auth/google/callback`,
+        callbackURL: `${GOOGLE_CALLBACK_URL}`,
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -102,16 +106,15 @@ app.use(
   app.use('/uploads', express.static('uploads'));
 
 
-    app.use((err, req, res, next) => {
-  console.error("Server error:", err);
-  res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
-});
-
   app.get("/",(req,res)=>{
-    res.send("helllo world")
+    res.send("hello world")
   })
 
 
+  app.use((req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+});
 
 
   app.use("/api/user",user);
